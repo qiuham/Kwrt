@@ -172,6 +172,11 @@ jobs:
                 git checkout ${REPO_BRANCH}
             fi
         fi
+        echo "回退到国庆版本（2024-10-01之前）"
+        cd openwrt
+        git checkout $(git rev-list -n 1 --before="2024-10-01" master) ||
+        git checkout $(git rev-list -n 1 --before="2024-10-01" HEAD)
+        cd ..
 
     - name: Free up disk space
       env:
